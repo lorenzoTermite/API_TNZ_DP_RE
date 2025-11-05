@@ -1,6 +1,7 @@
 
 package com.example.progettotest.dao;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,6 +11,7 @@ import java.util.List;
 import com.example.progettotest.model.TNzDpRe;
 import javax.sql.DataSource;
 import org.springframework.stereotype.Repository;
+import org.springframework.core.io.ClassPathResource;
 
 @Repository
 public class TNzDpReDao {
@@ -22,8 +24,16 @@ public class TNzDpReDao {
 
     // Recupera tutti i record (solo ID e description per esempio)
     public List<String> findAllDescriptions() {
-        List<String> descriptions = new ArrayList<>();
-        String sql = "SELECT description FROM  tseeui02.t_nz_dp_re";
+       List<String> descriptions = new ArrayList<>();
+
+    // 🔹 Leggo il file SQL direttamente qui
+    String sql = "";
+    try {
+        ClassPathResource resource = new ClassPathResource("sql/find_all_descriptions.sql");
+        sql = new String(resource.getInputStream().readAllBytes());
+    } catch (IOException e) {
+        throw new RuntimeException("Errore nel caricamento del file SQL", e);
+    }
         try (Connection conn = dataSource.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql);
              ResultSet rs = stmt.executeQuery()) {

@@ -134,5 +134,24 @@ public class TNzDpReDao {
         return records;
     }
 
+    public void fillTNzDpRe(String referenceDate) {
+
+          String sql = "";
+    try {
+        ClassPathResource resource = new ClassPathResource("sql/fillTNZdpre.sql");
+        sql = new String(resource.getInputStream().readAllBytes());
+    } catch (IOException e) {
+        throw new RuntimeException("Errore nel caricamento del file SQL", e);
+    }
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, referenceDate);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     
 }

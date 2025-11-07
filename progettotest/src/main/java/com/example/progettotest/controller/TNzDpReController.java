@@ -68,4 +68,19 @@ public ResponseEntity<List<TNzDpRe>> getAllRecords(
     return ResponseEntity.ok(records);
 }
 
+@PostMapping("/FillTNzDpRe")
+@Operation(summary = "Fill TNzDpRe table with data from perimeter")    
+public ResponseEntity<Void> fillTNzDpRe(
+    @Parameter(
+        description = "Reference date in format yyyy-MM-dd",
+        schema = @Schema(type = "string", format = "date")
+    )
+    @RequestParam 
+    @DateTimeFormat(pattern = "yyyy-MM-dd") 
+    String referenceDate) {
+    
+    tnzDpReService.fillTNzDpRe(referenceDate);
+    return ResponseEntity.ok().build(); 
+    }
+
 }

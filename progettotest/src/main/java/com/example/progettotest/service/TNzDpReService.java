@@ -6,6 +6,9 @@ import java.util.List;
 import java.util.Optional;
 import com.example.progettotest.dao.TNzDpReDao;
 import com.example.progettotest.model.TNzDpRe;
+
+import jakarta.transaction.Transactional;
+
 import java.sql.Date;
 @Service
 public class TNzDpReService {
@@ -39,4 +42,9 @@ public class TNzDpReService {
     public List<TNzDpRe> getAllRecords(String referenceDate) {
         return tnzDpReDao.findAll( referenceDate);
     }
+
+@Transactional
+public void fillTNzDpRe(String referenceDate) {
+    tnzDpReDao.fillTNzDpRe(referenceDate);
+}
 }

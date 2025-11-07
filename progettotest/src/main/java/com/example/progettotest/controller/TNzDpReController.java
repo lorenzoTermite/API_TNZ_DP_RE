@@ -52,13 +52,20 @@ public class TNzDpReController {
         return ResponseEntity.noContent().build();
     }
 
-    // Endpoint per recuperare tutti i record
-    @GetMapping("/all/{referenceDate}")
+    // Endpoint per recuperare tutti i record in base alla data di riferimento
 
-    @Operation(summary = "Get all TNzDpRe records by reference date")
-    public ResponseEntity<List<TNzDpRe>> getAllRecords(
-            @PathVariable  String referenceDate) {
-        List<TNzDpRe> records = tnzDpReService.getAllRecords(referenceDate);
-        return ResponseEntity.ok(records);
-    }
+@GetMapping("/all")
+@Operation(summary = "Get all TNzDpRe records by reference date")
+public ResponseEntity<List<TNzDpRe>> getAllRecords(
+        @Parameter(
+            description = "Reference date in format yyyy-MM-dd",
+            schema = @Schema(type = "string", format = "date")
+        )
+        @RequestParam 
+        @DateTimeFormat(pattern = "yyyy-MM-dd") String referenceDate) {
+    
+    List<TNzDpRe> records = tnzDpReService.getAllRecords(referenceDate);
+    return ResponseEntity.ok(records);
+}
+
 }

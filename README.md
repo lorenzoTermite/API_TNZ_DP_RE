@@ -28,11 +28,11 @@ Controller (gestisce la richiesta)
 
 ↓  
 
-Service (logica di business e transazioni)  
+Service (logica di business)  
 
 ↓  
 
-Repository / DAO (esecuzione query SQL)  
+ DAO (esecuzione query SQL)  
 
 ↓  
 

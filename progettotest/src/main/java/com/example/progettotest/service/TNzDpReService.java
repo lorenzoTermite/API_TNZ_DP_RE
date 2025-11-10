@@ -25,7 +25,7 @@ public class TNzDpReService {
     }
 
     // Recupera un record per ID
-   public Optional<TNzDpRe> getById(Long id) {
+   public Optional<TNzDpRe> getById(String id) {
     TNzDpRe DP_RE_table = tnzDpReDao.findById(id);
     if (DP_RE_table == null) return Optional.empty();
     return Optional.of(DP_RE_table);
@@ -34,7 +34,7 @@ public class TNzDpReService {
 
     // Cancella un record per ID
     @Transactional
-    public void deleteById(Long id) {
+    public void deleteById(String id) {
         tnzDpReDao.deleteById(id);
     }
 

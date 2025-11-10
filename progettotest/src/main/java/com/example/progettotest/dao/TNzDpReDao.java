@@ -23,7 +23,7 @@ public class TNzDpReDao {
         this.dataSource = dataSource;
     }
 
-    // Recupera tutti i record (solo ID e description per esempio)
+    // Recupera tutti i record delle descrizioni
     public List<String> findAllDescriptions() {
        List<String> descriptions = new ArrayList<>();
 
@@ -49,7 +49,7 @@ public class TNzDpReDao {
     }
 
     // Trova record per ID
-    public TNzDpRe findById(Long id) {
+    public TNzDpRe findById(String id) {
       // 🔹 Leggo il file SQL direttamente qui
     String sql = "";
     try {
@@ -61,11 +61,11 @@ public class TNzDpReDao {
         try (Connection conn = dataSource.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setLong(1, id);
+            stmt.setString(1, id);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
                 return new TNzDpRe(
-                        rs.getLong("id"),
+                        rs.getString("id"),
                         rs.getDate("reference_date"),
                         rs.getString("description"),
                         rs.getInt("amount"),
@@ -79,11 +79,11 @@ public class TNzDpReDao {
     }
 
     // Cancella record per ID
-    public void deleteById(Long id) {
+    public void deleteById(String id) {
           // 🔹 Leggo il file SQL direttamente qui
     String sql = "";
     try {
-        ClassPathResource resource = new ClassPathResource("sql/deteleById.sql");
+        ClassPathResource resource = new ClassPathResource("sql/deleteById.sql");
         sql = new String(resource.getInputStream().readAllBytes());
     } catch (IOException e) {
         throw new RuntimeException("Errore nel caricamento del file SQL", e);
@@ -91,14 +91,14 @@ public class TNzDpReDao {
         try (Connection conn = dataSource.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setLong(1, id);
+            stmt.setString(1, id);
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    //ESEGUI QUERY SELECT ALL
+    //ESEGUI QUERY SELECT ALL parametrica per data di riferimento
     public List<TNzDpRe> findAll(String referenceDate) {
       
         List<TNzDpRe> records = new ArrayList<>();
@@ -119,7 +119,7 @@ public class TNzDpReDao {
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 TNzDpRe record = new TNzDpRe(
-                        rs.getLong("id"),
+                        rs.getString("id"),
                         rs.getDate("reference_date"),
                         rs.getString("description"),
                         rs.getInt("amount"),

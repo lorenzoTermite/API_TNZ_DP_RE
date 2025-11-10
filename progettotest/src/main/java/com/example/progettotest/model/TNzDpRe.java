@@ -4,7 +4,7 @@ import java.util.Date; // aggiungi questo import
 
 public class TNzDpRe {
 
-    private Long id;
+    private String id;
     private Date reference_date;
     private String description;
     private Integer amount;
@@ -14,7 +14,7 @@ public class TNzDpRe {
     public TNzDpRe() {
     }
 
-    public TNzDpRe(Long id, Date reference_date, String description, Integer amount, String status) {
+    public TNzDpRe(String id, Date reference_date, String description, Integer amount, String status) {
         this.id = id;
         this.reference_date = reference_date;
         this.description = description;
@@ -23,11 +23,11 @@ public class TNzDpRe {
     }
 
     // Getter e Setter
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

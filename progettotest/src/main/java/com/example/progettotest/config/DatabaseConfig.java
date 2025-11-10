@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import javax.sql.DataSource;
-import com.example.progettotest.dao.TNzDpReDao; // aggiungi questo import
+import com.example.progettotest.dao.TNzDpReDao; 
 
 @Configuration
 public class DatabaseConfig {

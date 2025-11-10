@@ -35,7 +35,7 @@ public class TNzDpReController {
     // Endpoint per recuperare un record per ID
     @GetMapping("/{id}")
     @Operation(summary = "Get TNzDpRe record by ID")
-    public ResponseEntity<TNzDpRe> getById(@PathVariable Long id) {
+    public ResponseEntity<TNzDpRe> getById(@PathVariable String id) {
         TNzDpRe record = tnzDpReService.getById(id).orElse(null);
         if (record == null) {
             return ResponseEntity.notFound().build();
@@ -46,7 +46,7 @@ public class TNzDpReController {
     // Endpoint per cancellare un record per ID
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete TNzDpRe record by ID")
-    public ResponseEntity<Void> deleteById(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteById(@PathVariable String id) {
         tnzDpReService.deleteById(id);
         return ResponseEntity.noContent().build();
     }

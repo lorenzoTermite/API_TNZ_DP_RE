@@ -116,7 +116,7 @@ public class TNzDpReDao {
         return records;
     }
 
-    // Popola la tabella TNzDpRe dalla tabella Perimetro
+  // Popola la tabella TNzDpRe dalla tabella Perimetro
     public void fillTNzDpRe(String referenceDate) {
         String sql = loadSql("sql/fillTNZdpre.sql");
 
@@ -124,4 +124,9 @@ public class TNzDpReDao {
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, referenceDate);
-            stmt.executeUpdat
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+}

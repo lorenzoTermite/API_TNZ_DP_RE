@@ -38,7 +38,8 @@ Service (logica di business)
 
 Database Oracle
 
-## 🌐 Endpoint REST – TNzDpReController
+## 🌐 Endpoint REST – 
+Controller
 
 L’applicazione segue un’architettura a livelli:
 

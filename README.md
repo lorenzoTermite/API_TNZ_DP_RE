@@ -1,4 +1,4 @@
-# 🏗️ Progetto TNzDpRe – Spring Boot REST API
+# 🏗️ Progetto  Spring Boot REST API
 
 Questo progetto espone delle API REST sviluppate in **Spring Boot** per l’esecuzione e il monitoraggio di query SQL su database **Oracle**.  
 
@@ -40,7 +40,7 @@ Database Oracle
 
 ## 🌐 Endpoint REST – TNzDpReController
 
-La classe `TNzDpReController` espone le API REST per interagire con la tabella `TNzDpRe`.  
+La classe `TNzDpReController` espone le API REST per interagire con la tabella `dp_re`.  
 Ogni endpoint utilizza il servizio `TNzDpReService`, che a sua volta comunica con il livello `DAO` per eseguire le query sul database Oracle.
 
 ### 📘 Lista degli endpoint principali

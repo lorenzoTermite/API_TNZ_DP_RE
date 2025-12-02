@@ -56,32 +56,32 @@ Ogni endpoint del controller delega al service, che a sua volta interagisce con 
 
 ### 1️⃣ **GET /all**
 **Descrizione:**  
-Recupera tutti i record della tabella `TNzDpRe` filtrati in base alla data di riferimento (`referenceDate`).
+Recupera tutti i record della tabella  filtrati in base alla data di riferimento (`referenceDate`).
 
 **Parametri:**
 - `referenceDate` *(string, formato yyyy-MM-dd)* → Data di riferimento.
 
 **Esempio di chiamata Swagger:**  
-[GET /all/2024-12-31](http://localhost:8080/api/tnz-dp-re/all?referenceDate=2024-12-31)
+[GET /all/2024-12-31](http://localhost:8080/api/dp/all?referenceDate=2024-12-31)
 
 
 **Operazione SQL eseguita:**
 ```sql
-SELECT * FROM  user002.dp_re where REFERENCE_DATE=TO_DATE(?,'YYYY-MM-DD')
+SELECT * FROM  user002.dp where REFERENCE_DATE=TO_DATE(?,'YYYY-MM-DD')
 ```
-2️⃣ POST /FillTNzDpRe
+2️⃣ POST /Filldp
 
 Descrizione:
-Popola la tabella TNzDpRe con i dati provenienti dalla tabella PERIMETRO.
+Popola la tabella con i dati provenienti dalla tabella PERIMETRO .
 La data di riferimento viene passata come parametro referenceDate.
 
 Parametri:
 referenceDate (string, formato yyyy-MM-dd) → Data di riferimento per il popolamento.
 
 Esempio di chiamata Swagger:
-[POST /FillTNzDpRe?referenceDate=2024-12-31](http://localhost:8080/api/tnz-dp-re/FillTNzDpRe?referenceDate=2024-12-31)
+[POST /Filldp?referenceDate=2024-12-31](http://localhost:8080/api/dp/Filldp?referenceDate=2024-12-31)
 ```sql
-INSERT INTO user002.dp_re (ID, REFERENCE_DATE, DESCRIPTION, AMOUNT, STATUS)
+INSERT INTO user002.dp (ID, REFERENCE_DATE, DESCRIPTION, AMOUNT, STATUS)
 SELECT
     p.IDENTIFIER,
     p.REFERENCE_DATE,
@@ -98,10 +98,10 @@ Descrizione:
 Restituisce solo le descrizioni presenti nella tabella TNzDpRe.
 
 Esempio di chiamata Swagger:
-[GET /5](http://localhost:8080/api/tnz-dp-re/descriptions)
+[GET /5](http://localhost:8080/api/dp/descriptions)
 Operazione SQL eseguita:
 ```sql
-SELECT description FROM user002.dp_re
+SELECT description FROM user002.dp
 ```
 
 4️⃣ GET /{id}
@@ -110,7 +110,7 @@ Descrizione:
 Restituisce un singolo record della tabella TNzDpRe tramite l’ID.
 
 Esempio di chiamata Swagger:
-[GET /5](http://localhost:8080/api/tnz-dp-re/ID_001)
+[GET /5](http://localhost:8080/api/dp/ID_001)
 Operazione SQL eseguita:
 ```sql
 SELECT * FROM user002.dp_re WHERE id = ? 
@@ -121,8 +121,8 @@ Descrizione:
 Cancella un record dalla tabella TNzDpRe tramite l’ID fornito.
 
 Esempio di chiamata Swagger:
-[DELETE /5](http://localhost:8080/api/tnz-dp-re/ID_001)
+[DELETE /5](http://localhost:8080/api/dp/ID_001)
 Operazione SQL eseguita:
 ```sql
-DELETE FROM  user002.dp_re WHERE id = + ?
+DELETE FROM  user002.dp WHERE id = + ?
 ```

@@ -1,6 +1,5 @@
-# 🏗️ Progetto  Spring Boot REST API
-
-Questo progetto espone delle API REST sviluppate in **Spring Boot** per l’esecuzione e il monitoraggio di query SQL su database **Oracle**.  
+# 🏗️ Progetto  Spring Boot REST API 
+Questo progetto espone delle API REST sviluppate in **Spring Boot** per l’esecuzionedi query SQL su database **Oracle**.  
 
 
 ---

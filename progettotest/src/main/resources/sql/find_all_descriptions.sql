@@ -1,1 +1,1 @@
-SELECT description FROM tseeui02.t_nz_dp_re
+SELECT description FROM user002.dp_re

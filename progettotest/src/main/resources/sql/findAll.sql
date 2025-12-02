@@ -1,1 +1,1 @@
-SELECT * FROM  tseeui02.t_nz_dp_re where REFERENCE_DATE=TO_DATE(?,'YYYY-MM-DD')
+SELECT * FROM  user002.dp_re where REFERENCE_DATE=TO_DATE(?,'YYYY-MM-DD')

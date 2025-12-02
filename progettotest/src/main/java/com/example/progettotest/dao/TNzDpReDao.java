@@ -1,4 +1,3 @@
-
 package com.example.progettotest.dao;
 
 import java.io.IOException;
@@ -18,23 +17,27 @@ import org.springframework.core.io.ClassPathResource;
 public class TNzDpReDao {
 
     private final DataSource dataSource;
+
     @Autowired
     public TNzDpReDao(DataSource dataSource) {
         this.dataSource = dataSource;
     }
 
+    // Metodo privato per leggere il file SQL
+    private String loadSql(String path) {
+        try {
+            ClassPathResource resource = new ClassPathResource(path);
+            return new String(resource.getInputStream().readAllBytes());
+        } catch (IOException e) {
+            throw new RuntimeException("Errore nel caricamento del file SQL: " + path, e);
+        }
+    }
+
     // Recupera tutti i record delle descrizioni
     public List<String> findAllDescriptions() {
-       List<String> descriptions = new ArrayList<>();
+        List<String> descriptions = new ArrayList<>();
+        String sql = loadSql("sql/find_all_descriptions.sql");
 
-    // 🔹 Leggo il file SQL direttamente qui
-    String sql = "";
-    try {
-        ClassPathResource resource = new ClassPathResource("sql/find_all_descriptions.sql");
-        sql = new String(resource.getInputStream().readAllBytes());
-    } catch (IOException e) {
-        throw new RuntimeException("Errore nel caricamento del file SQL", e);
-    }
         try (Connection conn = dataSource.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql);
              ResultSet rs = stmt.executeQuery()) {
@@ -50,14 +53,8 @@ public class TNzDpReDao {
 
     // Trova record per ID
     public TNzDpRe findById(String id) {
-      // 🔹 Leggo il file SQL direttamente qui
-    String sql = "";
-    try {
-        ClassPathResource resource = new ClassPathResource("sql/getById.sql");
-        sql = new String(resource.getInputStream().readAllBytes());
-    } catch (IOException e) {
-        throw new RuntimeException("Errore nel caricamento del file SQL", e);
-    }
+        String sql = loadSql("sql/getById.sql");
+
         try (Connection conn = dataSource.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
@@ -80,14 +77,8 @@ public class TNzDpReDao {
 
     // Cancella record per ID
     public void deleteById(String id) {
-          // 🔹 Leggo il file SQL direttamente qui
-    String sql = "";
-    try {
-        ClassPathResource resource = new ClassPathResource("sql/deleteById.sql");
-        sql = new String(resource.getInputStream().readAllBytes());
-    } catch (IOException e) {
-        throw new RuntimeException("Errore nel caricamento del file SQL", e);
-    }
+        String sql = loadSql("sql/deleteById.sql");
+
         try (Connection conn = dataSource.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
@@ -98,23 +89,15 @@ public class TNzDpReDao {
         }
     }
 
-    //ESEGUI QUERY SELECT ALL parametrica per data di riferimento
+    // Esegui query SELECT ALL parametrica per data di riferimento
     public List<TNzDpRe> findAll(String referenceDate) {
-      
         List<TNzDpRe> records = new ArrayList<>();
-       String sql = "";
-    try {
-        ClassPathResource resource = new ClassPathResource("sql/findAll.sql");
-        sql = new String(resource.getInputStream().readAllBytes());
-    } catch (IOException e) {
-        throw new RuntimeException("Errore nel caricamento del file SQL", e);
-    }
+        String sql = loadSql("sql/findAll.sql");
+
         try (Connection conn = dataSource.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql);
-             ) {
-// Impostiamo i parametri nella query (gli indici partono da 1)
-           
-            stmt.setString(1, referenceDate );
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, referenceDate);
 
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
@@ -135,23 +118,10 @@ public class TNzDpReDao {
 
     // Popola la tabella TNzDpRe dalla tabella Perimetro
     public void fillTNzDpRe(String referenceDate) {
+        String sql = loadSql("sql/fillTNZdpre.sql");
 
-          String sql = "";
-    try {
-        ClassPathResource resource = new ClassPathResource("sql/fillTNZdpre.sql");
-        sql = new String(resource.getInputStream().readAllBytes());
-    } catch (IOException e) {
-        throw new RuntimeException("Errore nel caricamento del file SQL", e);
-    }
         try (Connection conn = dataSource.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, referenceDate);
-            stmt.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    
-}
+            stmt.executeUpdat

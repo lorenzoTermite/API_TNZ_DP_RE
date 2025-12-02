@@ -32,8 +32,5 @@ public class DatabaseConfig {
         return dataSource;
     }
 
-    @Bean
-    public TNzDpReDao tnzDpReDao() {
-        return new TNzDpReDao(dataSource());
-    }
+   
 }

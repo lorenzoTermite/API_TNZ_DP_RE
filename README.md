@@ -37,13 +37,13 @@ Service (logica di business)
 Database Oracle
 
 
-Controller
+-->Controller
 Espone le API REST e gestisce le richieste provenienti dal client.
 
-Service
+-->Service
 Contiene la logica applicativa e coordina le operazioni richieste dai controller.
 
-DAO/Repository
+-->DAO/Repository
 Si occupa dell’accesso al database e dell’esecuzione delle query, mantenendo separata la logica di persistenza.
 
 Ogni endpoint del controller delega al service, che a sua volta interagisce con il livello di persistenza per ottenere o modificare i dati del database.

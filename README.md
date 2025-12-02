@@ -95,7 +95,7 @@ FROM
 3️⃣ GET /descriptions
 
 Descrizione:
-Restituisce solo le descrizioni presenti nella tabella TNzDpRe.
+Restituisce solo le descrizioni presenti nella tabella dp.
 
 Esempio di chiamata Swagger:
 [GET /5](http://localhost:8080/api/dp/descriptions)

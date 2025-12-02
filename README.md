@@ -40,8 +40,18 @@ Database Oracle
 
 ## 🌐 Endpoint REST – TNzDpReController
 
-La classe `TNzDpReController` espone le API REST per interagire con la tabella `dp_re`.  
-Ogni endpoint utilizza il servizio `TNzDpReService`, che a sua volta comunica con il livello `DAO` per eseguire le query sul database Oracle.
+L’applicazione segue un’architettura a livelli:
+
+Controller
+Espone le API REST e gestisce le richieste provenienti dal client.
+
+Service
+Contiene la logica applicativa e coordina le operazioni richieste dai controller.
+
+DAO/Repository
+Si occupa dell’accesso al database e dell’esecuzione delle query, mantenendo separata la logica di persistenza.
+
+Ogni endpoint del controller delega al service, che a sua volta interagisce con il livello di persistenza per ottenere o modificare i dati del database.
 
 ### 📘 Lista degli endpoint principali
 
